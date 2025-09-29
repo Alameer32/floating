@@ -75,10 +75,10 @@ export function Chatbot() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-4 z-50 max-w-[calc(100vw-2rem)]">
       {/* Chat Window */}
       {isOpen && (
-        <Card className="mb-4 w-96 h-[500px] flex flex-col shadow-2xl border-0 bg-card/95 backdrop-blur-xl slide-up">
+        <Card className="mb-4 w-full max-w-sm sm:w-96 h-[min(500px,calc(100vh-6rem))] flex flex-col shadow-2xl border-0 bg-card/95 backdrop-blur-xl slide-up">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-gradient-start to-gradient-end text-primary-foreground rounded-t-lg">
             <div className="flex items-center gap-3">

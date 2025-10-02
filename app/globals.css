@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated color scheme to match modern chatbot design with purple/blue gradient theme */
+  /* Updated color scheme to match modern chatbot design with light red/light purple gradient theme */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -38,6 +38,12 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Custom chatbot colors - light red to light purple gradient */
+  --gradient-start: oklch(0.75 0.15 15); /* Light red/coral */
+  --gradient-end: oklch(0.75 0.15 300); /* Light purple */
+  --chat-bubble-user: oklch(0.75 0.15 15); /* Light red for user messages */
+  --chat-bubble-bot: oklch(0.96 0.02 300); /* Very light purple for bot messages */
 }
 
 .dark {
@@ -140,10 +146,10 @@
 @keyframes pulse-glow {
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3); /* Updated glow to match light red theme */
   }
   50% {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+    box-shadow: 0 0 30px rgba(236, 72, 153, 0.6);
   }
 }
 

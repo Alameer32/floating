@@ -29,7 +29,6 @@ export function Chatbot() {
   ])
   const [inputValue, setInputValue] = useState("")
   const [isTyping, setIsTyping] = useState(false)
-  const [conversationId, setConversationId] = useState<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
@@ -58,17 +57,10 @@ export function Chatbot() {
       const response = await fetch("/api/copilot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: inputValue,
-          conversationId: conversationId,
-        }),
+        body: JSON.stringify({ message: inputValue }),
       })
 
       const data = await response.json()
-
-      if (data.conversationId) {
-        setConversationId(data.conversationId)
-      }
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),

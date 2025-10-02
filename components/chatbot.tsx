@@ -29,6 +29,7 @@ export function Chatbot() {
   ])
   const [inputValue, setInputValue] = useState("")
   const [isTyping, setIsTyping] = useState(false)
+  const [conversationId, setConversationId] = useState<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
@@ -53,18 +54,41 @@ export function Chatbot() {
     setInputValue("")
     setIsTyping(true)
 
-    // Simulate AI response
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/copilot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: inputValue,
+          conversationId: conversationId,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (data.conversationId) {
+        setConversationId(data.conversationId)
+      }
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content:
-          "Thanks for your message! I'm here to help you with any questions you might have. This is a demo response - in a real implementation, this would connect to your AI service.",
+        content: data.response,
         isUser: false,
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, botMessage])
+    } catch (error) {
+      console.error("Error:", error)
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: "Sorry, I'm having trouble connecting. Please try again.",
+        isUser: false,
+        timestamp: new Date(),
+      }
+      setMessages((prev) => [...prev, errorMessage])
+    } finally {
       setIsTyping(false)
-    }, 1500)
+    }
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {

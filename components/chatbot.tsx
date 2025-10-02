@@ -80,10 +80,10 @@ export function Chatbot() {
       {isOpen && (
         <Card className="mb-4 w-full max-w-sm sm:w-96 h-[min(500px,calc(100vh-6rem))] flex flex-col shadow-2xl border-0 bg-card/95 backdrop-blur-xl slide-up">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-gradient-start to-gradient-end text-primary-foreground rounded-t-lg">
+          <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-[oklch(0.75_0.15_15)] to-[oklch(0.75_0.15_300)] text-white rounded-t-lg">
             <div className="flex items-center gap-3">
-              <Avatar className="w-8 h-8 bg-primary-foreground/20">
-                <AvatarFallback className="text-primary-foreground">
+              <Avatar className="w-8 h-8 bg-white/20">
+                <AvatarFallback className="text-white">
                   <Sparkles className="w-4 h-4" />
                 </AvatarFallback>
               </Avatar>
@@ -96,7 +96,7 @@ export function Chatbot() {
               variant="ghost"
               size="sm"
               onClick={() => setIsOpen(false)}
-              className="text-primary-foreground hover:bg-primary-foreground/20 h-8 w-8 p-0"
+              className="text-white hover:bg-white/20 h-8 w-8 p-0 shrink-0"
             >
               <X className="w-4 h-4" />
             </Button>
@@ -110,8 +110,8 @@ export function Chatbot() {
                 className={cn("flex gap-3 message-appear", message.isUser ? "justify-end" : "justify-start")}
               >
                 {!message.isUser && (
-                  <Avatar className="w-8 h-8 bg-gradient-to-br from-gradient-start to-gradient-end">
-                    <AvatarFallback className="text-primary-foreground">
+                  <Avatar className="w-8 h-8 bg-gradient-to-br from-[oklch(0.75_0.15_15)] to-[oklch(0.75_0.15_300)]">
+                    <AvatarFallback className="text-white">
                       <Sparkles className="w-4 h-4" />
                     </AvatarFallback>
                   </Avatar>
@@ -120,15 +120,15 @@ export function Chatbot() {
                   className={cn(
                     "max-w-[80%] rounded-2xl px-4 py-2 text-sm",
                     message.isUser
-                      ? "bg-chat-bubble-user text-primary-foreground ml-auto"
-                      : "bg-chat-bubble-bot text-card-foreground",
+                      ? "bg-[oklch(0.75_0.15_15)] text-white ml-auto" /* Light red for user */
+                      : "bg-[oklch(0.96_0.02_300)] text-card-foreground" /* Very light purple for bot */,
                   )}
                 >
                   <p className="text-pretty leading-relaxed">{message.content}</p>
                   <p
                     className={cn(
                       "text-xs mt-1 opacity-70",
-                      message.isUser ? "text-primary-foreground/70" : "text-muted-foreground",
+                      message.isUser ? "text-white/70" : "text-muted-foreground",
                     )}
                   >
                     {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
@@ -144,12 +144,12 @@ export function Chatbot() {
 
             {isTyping && (
               <div className="flex gap-3 justify-start message-appear">
-                <Avatar className="w-8 h-8 bg-gradient-to-br from-gradient-start to-gradient-end">
-                  <AvatarFallback className="text-primary-foreground">
+                <Avatar className="w-8 h-8 bg-gradient-to-br from-[oklch(0.75_0.15_15)] to-[oklch(0.75_0.15_300)]">
+                  <AvatarFallback className="text-white">
                     <Sparkles className="w-4 h-4" />
                   </AvatarFallback>
                 </Avatar>
-                <div className="bg-chat-bubble-bot text-card-foreground rounded-2xl px-4 py-2">
+                <div className="bg-[oklch(0.96_0.02_300)] text-card-foreground rounded-2xl px-4 py-2">
                   <div className="flex gap-1">
                     <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                     <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce [animation-delay:-0.15s]"></div>
@@ -174,7 +174,7 @@ export function Chatbot() {
               <Button
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim()}
-                className="bg-gradient-to-r from-gradient-start to-gradient-end hover:opacity-90 transition-opacity"
+                className="bg-gradient-to-r from-[oklch(0.75_0.15_15)] to-[oklch(0.75_0.15_300)] hover:opacity-90 transition-opacity text-white"
               >
                 <Send className="w-4 h-4" />
               </Button>
@@ -187,15 +187,11 @@ export function Chatbot() {
       <Button
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "w-14 h-14 rounded-full shadow-lg bg-gradient-to-r from-gradient-start to-gradient-end hover:opacity-90 transition-all duration-300 border-0",
+          "w-14 h-14 rounded-full shadow-lg bg-gradient-to-r from-[oklch(0.75_0.15_15)] to-[oklch(0.75_0.15_300)] hover:opacity-90 transition-all duration-300 border-0",
           !isOpen && "float-animation pulse-glow",
         )}
       >
-        {isOpen ? (
-          <X className="w-6 h-6 text-primary-foreground" />
-        ) : (
-          <MessageCircle className="w-6 h-6 text-primary-foreground" />
-        )}
+        <MessageCircle className="w-6 h-6 text-white" />
       </Button>
     </div>
   )
